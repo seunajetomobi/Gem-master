@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: gem
+      POSTGRES_USER: gem
+      POSTGRES_PASSWORD: gem
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  web:
+    build: .
+    command: bash -c "python manage.py migrate --noinput && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      SECRET_KEY: "dev-secret"
+      DATABASE_URL: "postgres://gem:gem@db:5432/gem"
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

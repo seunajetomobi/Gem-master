@@ -16,6 +16,7 @@ urlpatterns = [
     path('contact/', include('contact.urls')),
     path('marketing', include('marketing.urls')),
     path('shipping', include('shipping.urls')),
+    path('api/', include('api.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 handler404 = 'gem_master.views.handler404'
 handler500 = 'gem_master.views.handler500'
